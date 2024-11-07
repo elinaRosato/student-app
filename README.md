@@ -58,6 +58,89 @@ To start the development server and view the app locally, run:
     npm run dev
 The app will be available at http://localhost:3000.
 
+## Database Schema
+
+The app uses the following database schema with Supabase:
+
+### Users Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| user_id         | SERIAL   | Primary key, unique identifier       |
+| username        | VARCHAR  | Unique username, not null            |
+| password        | VARCHAR  | User's password, not null            |
+| email_address   | VARCHAR  | Unique email address, not null       |
+| name            | VARCHAR  | User's first name, not null          |
+| surname         | VARCHAR  | User's surname, not null             |
+
+### Courses Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| course_id       | SERIAL   | Primary key, unique identifier       |
+| course_code     | VARCHAR  | Unique course code                   |
+| course_name     | VARCHAR  | Name of the course, default: 'New Course'|
+| course_field    | VARCHAR  | Field of the course (e.g., Science)  |
+| user_id         | INT      | Foreign key to Users table           |
+
+### Notebooks Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| notebook_id     | SERIAL   | Primary key, unique identifier       |
+| notebook_name   | VARCHAR  | Name of the notebook, default: 'New Notebook' |
+| user_id         | INT      | Foreign key to Users table           |
+
+### Notebook_Courses Table (Many-to-Many Relationship)
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| notebook_id     | INT      | Foreign key to Notebooks table       |
+| course_id       | INT      | Foreign key to Courses table         |
+
+### Notes Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| note_id         | SERIAL   | Primary key, unique identifier       |
+| note_title      | VARCHAR  | Title of the note, default: 'New Note'|
+| date_created    | TIMESTAMP| Timestamp when the note was created  |
+| date_modified   | TIMESTAMP| Timestamp of last modification       |
+| notebook_id     | INT      | Foreign key to Notebooks table       |
+
+### Blocks Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| block_id        | SERIAL   | Primary key, unique identifier       |
+| block_type      | VARCHAR  | Type of block (e.g., text, image)    |
+| block_content   | TEXT     | Content of the block                 |
+| block_metadata  | JSONB    | JSON metadata for flexibility        |
+| note_id         | INT      | Foreign key to Notes table           |
+
+### Tasks Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| task_id         | SERIAL   | Primary key, unique identifier       |
+| task_description| TEXT     | Description of the task, default: 'New Task' |
+| task_due_date   | DATE     | Due date for the task                |
+| task_status     | VARCHAR  | Status of the task ('Not Started', 'Done', 'In Progress') |
+| user_id         | INT      | Foreign key to Users table           |
+
+### Task_Courses Table (Many-to-Many Relationship)
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| task_id         | INT      | Foreign key to Tasks table          |
+| course_id       | INT      | Foreign key to Courses table         |
+
+### Resources Table
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| resource_id     | SERIAL   | Primary key, unique identifier       |
+| resource_name   | VARCHAR  | Name of the resource                 |
+| resource_type   | VARCHAR  | Type of resource (PDF, Video, etc.)  |
+| resource_content| TEXT     | Content or URL of the resource       |
+| user_id         | INT      | Foreign key to Users table           |
+
+### Resource_Courses Table (Many-to-Many Relationship)
+| Column Name     | Type     | Description                          |
+|-----------------|----------|--------------------------------------|
+| resource_id     | INT      | Foreign key to Resources table       |
+| course_id       | INT      | Foreign key to Courses table         |
 
 ## Contributing
 1. Fork the repository.
