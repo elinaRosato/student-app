@@ -13,6 +13,8 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.46.1",
     "autoprefixer": "^10.4.20",
     "next": "15.0.2",
     "react": "^18.3.1",
