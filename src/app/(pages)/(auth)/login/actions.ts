@@ -21,7 +21,7 @@ export async function login(formData: FormData) {
     redirect('/error')
   }
 
-  revalidatePath('/', 'layout')
+  revalidatePath('/dashboard', 'layout')
   redirect('/dashboard')
 }
 
@@ -41,12 +41,25 @@ export async function signup(formData: FormData) {
     redirect('/error')
   }
 
-  revalidatePath('/', 'layout')
+  revalidatePath('/dashboard', 'layout')
   redirect('/dashboard')
 }
 
 export async function recoverPassword(formData: FormData) {
-    const data = {
-      email: formData.get('email') as string,
-    }
+  const data = {
+    email: formData.get('email') as string,
   }
+}
+
+export async function logout() {
+  const supabase = await createClient()
+
+  const { error } = await supabase.auth.signOut()
+
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/')
+}

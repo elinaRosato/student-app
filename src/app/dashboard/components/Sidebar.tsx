@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { logout } from '@/app/(pages)/(auth)/login/actions';
+
 
 const Sidebar = () => {
 
@@ -68,12 +70,12 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="/logout"
+            <button
               className="block w-full text-left p-3 rounded-md hover:bg-red-600 focus:outline-none"
+              onClick={() => logout()}
             >
               Logout
-            </Link>
+            </button>
           </li>
         </ul>
       </div>
