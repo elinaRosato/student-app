@@ -23,7 +23,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/courses"
+              href="/dashboard/courses"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Courses
@@ -31,7 +31,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/notebooks"
+              href="/dashboard/notebooks"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Notebooks
@@ -39,7 +39,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/tasks"
+              href="/dashboard/tasks"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Tasks
@@ -47,7 +47,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/resources"
+              href="/dashboard/resources"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Resources
@@ -55,7 +55,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/settings"
+              href="/dashboard/settings"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Settings
@@ -63,7 +63,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/support"
+              href="/dashboard/support"
               className="block w-full text-left p-3 rounded-md hover:bg-gray-700 focus:outline-none"
             >
               Support
