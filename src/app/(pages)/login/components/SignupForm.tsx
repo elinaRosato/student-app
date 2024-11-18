@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { signup } from '../(auth)/login/actions';
+import { signup } from '../actions';
 
 export default function SignUpForm({ onSwitch }: { onSwitch: () => void }) {
     const [email, setEmail] = useState('');

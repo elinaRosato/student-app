@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { logout } from '@/app/(pages)/(auth)/login/actions';
+import { logout } from '@/app/(pages)/login/actions';
 
 
 const Sidebar = () => {

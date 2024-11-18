@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { login } from '../(auth)/login/actions';
+import { login } from '../actions';
 
 export default function LoginForm({ onSwitch, onRecover }: { onSwitch: () => void; onRecover: () => void }) {
   const [email, setEmail] = useState('');

@@ -14,6 +14,8 @@ CREATE TABLE public.Courses (
     course_id SERIAL PRIMARY KEY,
     course_code VARCHAR(50),
     course_name VARCHAR(100) NOT NULL DEFAULT 'New Course',
+    tags JSONB,
+    credits FLOAT,
     course_field VARCHAR(50),
     user_id UUID REFERENCES Users(user_id) ON DELETE SET NULL -- One user per course
 );
