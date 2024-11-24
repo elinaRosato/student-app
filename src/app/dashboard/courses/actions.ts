@@ -50,7 +50,7 @@ export async function deleteCourse(id: number) {
     })
 
     if( error ) {
-        throw new Error ('Error adding course.')
+        throw new Error ('Error deleting course.')
     }
 
     revalidatePath('/dashboard/courses');

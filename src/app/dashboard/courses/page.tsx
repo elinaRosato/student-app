@@ -4,6 +4,8 @@ import CreateCourseForm from './components/CreateCourseForm';
 import CourseList from './components/CourseList';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
+import CoursesClient from './components/CoursesClient';
 
 const Courses = async () => {
 
@@ -21,12 +23,7 @@ const Courses = async () => {
 
   return (
     <>
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold">Courses</h1>
-        <CreateCourseForm />
-        <hr className="my-4" />
-        <CourseList courses={courses || []} />
-      </div>
+        <CoursesClient courses={courses || []} />
     </>
   );
 };

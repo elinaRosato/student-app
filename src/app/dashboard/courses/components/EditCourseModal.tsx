@@ -16,9 +16,9 @@ export default function EditCourseModal({ course, onClose, onUpdate }: { course:
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-md">
-        <h2 className="text-xl mb-4">Edit Course</h2>
+    <div className="fixed inset-0 bg-slate-800 bg-opacity-50 flex justify-center items-center z-50">
+      <div className="w-1/2 bg-slate-100 p-6 rounded-md">
+      <h2 className="text-xl mb-4">Edit Course</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block mb-2">Course Name</label>
@@ -27,7 +27,7 @@ export default function EditCourseModal({ course, onClose, onUpdate }: { course:
               name="course_name"
               value={updatedCourse.course_name}
               onChange={handleChange}
-              className="w-full p-2 border rounded-md"
+              className="w-full bg-slate-50 p-2 border rounded-md"
             />
           </div>
           <div className="mb-4">
@@ -37,7 +37,7 @@ export default function EditCourseModal({ course, onClose, onUpdate }: { course:
               name="course_field"
               value={updatedCourse.course_field || ''}
               onChange={handleChange}
-              className="w-full p-2 border rounded-md"
+              className="w-full bg-slate-50 p-2 border rounded-md"
             />
           </div>
           <div className="mb-4">
@@ -47,7 +47,7 @@ export default function EditCourseModal({ course, onClose, onUpdate }: { course:
               name="credits"
               value={updatedCourse.credits || ''}
               onChange={handleChange}
-              className="w-full p-2 border rounded-md"
+              className="w-full bg-slate-50 p-2 border rounded-md"
             />
           </div>
           <div className="flex justify-end gap-4">
