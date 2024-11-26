@@ -20,34 +20,46 @@
  * or Server Actions.
  */
 
-import { Database } from '@/types/supabase'
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { Database } from '@/types/supabase';
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export async function createClient() {
-  const cookieStore = await cookies()
+  try {
+    const cookieStore = await cookies(); // No need for `await` here; `cookies` is synchronous.
 
-  return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll()
+    return createServerClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll: () => cookieStore.getAll(), // Access the `getAll` method correctly.
+          setAll: (cookiesToSet) => {
+            try {
+              cookiesToSet.forEach(({ name, value, options }) =>
+                cookieStore.set(name, value, options)
+              );
+            } catch {
+              // Ignore errors in static generation
+            }
+          },
         },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            )
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
+      }
+    );
+  } catch (error) {
+    console.warn('Cookies unavailable. Returning a non-session Supabase client.');
+    // Return a public client for static generation
+    return createServerClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll: () => [], // No cookies for static generation
+          setAll: () => {}, // No cookie setting for static generation
         },
-      },
-    }
-  )
+      }
+    );
+  }
 }
+
   

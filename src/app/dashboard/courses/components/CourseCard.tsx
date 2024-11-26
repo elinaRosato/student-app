@@ -5,11 +5,14 @@ import EditCourseModal from './EditCourseModal';
 import { Delete01Icon, Edit01Icon } from "hugeicons-react";
 import { deleteCourse, updateCourse } from '../actions';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function CourseCard( { course }: { course: Course } ) {
   const [showModal, setShowModal] = useState(false);
 
-  const handleDelete = async (courseId: number) => {
+  const handleDelete = async (e: React.MouseEvent, courseId: number) => {
+    e.stopPropagation();
+    e.preventDefault();
     try {
       await deleteCourse(courseId);
     } catch (error: any) {
@@ -17,7 +20,8 @@ export default function CourseCard( { course }: { course: Course } ) {
     }
   };
 
-  const handleUpdate = async (course: Course) => {
+  const handleUpdate = async ( course: Course ) => {
+  
     try { 
       await updateCourse(course);
     } catch (error: any) {
@@ -25,7 +29,9 @@ export default function CourseCard( { course }: { course: Course } ) {
     }
   };
 
-  const openModal = (course: Course) => {
+  const openModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
     setShowModal(true);
   };
 
@@ -34,7 +40,8 @@ export default function CourseCard( { course }: { course: Course } ) {
   };
 
   return (
-        <div className="flex justify-between p-4 bg-slate-50 rounded-md">
+    <>
+      <Link className="flex justify-between p-4 bg-slate-50 rounded-md" href={`/dashboard/courses/${course.course_id}`}>          
           <div>
             <div className='flex gap-2'>
               <span className="text-xl">{'📚'}</span>
@@ -47,20 +54,22 @@ export default function CourseCard( { course }: { course: Course } ) {
             
           </div>
           <div className='flex gap-4'>
-            <button onClick={() => openModal(course)}>
+            <button onClick={(e) => openModal(e)}>
               <Edit01Icon size={24} color='var(--secondary)' />
             </button>
-            <button onClick={() => handleDelete(course.course_id) }>
+            <button onClick={(e) => handleDelete(e, course.course_id) }>
               <Delete01Icon size={24} />
             </button>
           </div>
-          {showModal && course && (
-            <EditCourseModal
-              course={course}
-              onClose={closeModal}
-              onUpdate={handleUpdate}
-            />
-          )}
-        </div>
+      </Link>
+      {showModal && course && (
+        <EditCourseModal
+          course={course}
+          onClose={closeModal}
+          onUpdate={handleUpdate}
+        />
+      )}
+    </>
+    
   );
 };
