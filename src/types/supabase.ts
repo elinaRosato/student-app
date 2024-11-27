@@ -153,7 +153,7 @@ export type Database = {
           date_modified: string | null
           note_id: number
           note_title: string
-          notebook_id: number | null
+          notebook_id: number
           user_id: string
         }
         Insert: {
@@ -161,7 +161,7 @@ export type Database = {
           date_modified?: string | null
           note_id?: number
           note_title?: string
-          notebook_id?: number | null
+          notebook_id?: number
           user_id: string
         }
         Update: {
@@ -169,7 +169,7 @@ export type Database = {
           date_modified?: string | null
           note_id?: number
           note_title?: string
-          notebook_id?: number | null
+          notebook_id?: number
           user_id?: string
         }
         Relationships: [

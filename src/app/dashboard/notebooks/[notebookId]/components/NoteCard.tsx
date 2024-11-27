@@ -20,7 +20,7 @@ export default function NoteCard( { note }: { note: Note } ) {
 
 
   return (
-    <Link className="flex justify-between p-4 bg-slate-50 rounded-md" href={`/dashboard/notes/${note.note_id}`}>          
+    <Link className="flex justify-between p-4 bg-slate-50 rounded-md" href={`/dashboard/notebooks/${note.notebook_id}/${note.note_id}`}>          
       <div>
         <div className='flex gap-2'>
           <span className="text-xl">{'📝'}</span>
