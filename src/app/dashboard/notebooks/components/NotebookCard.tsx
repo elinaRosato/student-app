@@ -27,8 +27,13 @@ export default function NotebookCard( { notebook }: { notebook: Notebook } ) {
           <h3 className="text-xl font-medium text-slate-600">{notebook.notebook_name}</h3>
         </div>
         <div className='flex flex-wrap gap-2 wrap mt-2'>
-          {notebook.notebook_courses.map((course) => (
-            <p key={course.course_id} className='bg-blue-200 px-2 rounded-lg text-sm text-slate-500 font-light' >{course.courses?.course_name || ''}</p>
+          {notebook.notebook_courses?.map((course) => (
+            <p
+              key={course.course_id}
+              className="bg-blue-200 px-2 rounded-lg text-sm text-slate-500 font-light"
+            >
+              {course.courses?.course_name || ''}
+            </p>
           ))}
         </div>
       </div>
