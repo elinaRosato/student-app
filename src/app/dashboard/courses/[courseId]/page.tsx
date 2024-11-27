@@ -22,11 +22,13 @@ export async function generateStaticParams() {
 export default async function CoursePage({ params }: { params: { courseId: string } }) {
   const supabase = await createClient();
 
+  const { courseId } = await params
+
   // Fetch data for a single course based on courseId
   const { data: course, error } = await supabase
     .from('courses')
     .select('*')
-    .eq('course_id', params.courseId)
+    .eq('course_id', courseId)
     .single();
 
   if (error || !course) {

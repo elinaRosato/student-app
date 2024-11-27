@@ -47,14 +47,11 @@ const fetchData = async (notebookId : number): Promise<{ notes: Note[] }> => {
 
 export default async function NotebookPage({ params }: { params: { notebookId: string } }) {
 
-  const notebookId = parseInt(params.notebookId);
+  const { notebookId } = await params
   
-    if (isNaN(notebookId)) {
-      throw new Error("Invalid notebook ID");
-    }
   const supabase = await createClient();
 
-  const { notes } = await fetchData(notebookId);
+  const { notes } = await fetchData(parseInt(notebookId));
 
   // Fetch data for a single notebook based on notebookId
   const { data: notebook, error } = await supabase
