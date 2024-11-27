@@ -17,11 +17,11 @@ export default function CreateCourseForm({ onClose}: { onClose: () => void}) {
       const formData = new FormData(formRef.current!);
       await addCourse(formData);
       formRef.current?.reset();
-      alert('Course created successfully!');
     } catch (error: any) {
       setErrorMessage(error.message || 'An unexpected error occurred.');
     } finally {
       setLoading(false);
+      onClose();
     }
   };
 
