@@ -21,11 +21,11 @@ export default function CreateNotebookModal ({ onClose, courses }: { onClose: ()
         formData.append("course_code", selectedCourses.join(','));
         await addNotebook(formData);
         formRef.current?.reset();
-        alert('Notebook created successfully!');
       } catch (error: any) {
         setErrorMessage(error.message || 'An unexpected error occurred.');
       } finally {
         setLoading(false);
+        onClose();
       }
     };
 
@@ -126,7 +126,7 @@ export default function CreateNotebookModal ({ onClose, courses }: { onClose: ()
                 className={`py-2 px-4 bg-blue-500 text-white rounded-md`}
                 disabled={loading}
               >
-                {loading ? 'Creating...' : 'Create Course'}
+                {loading ? 'Creating...' : 'Create Notebook'}
               </button>
             </div>
             
