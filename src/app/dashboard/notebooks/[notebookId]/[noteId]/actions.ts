@@ -50,10 +50,8 @@ export async function getBlocks (noteId: number) {
 	.eq("note_id", noteId);
 
 	if (error) {
-	console.error("Error fetching blocks:", error.message);
 	return { error };
 	} else {
-	console.log(blocks);
 	return { blocks };
 	}	
 }
@@ -77,10 +75,8 @@ export async function addBlock (noteId: number, blockType: string,) {
         .select();
 
 	if (error) {
-		console.error("Error inserting block:", error.message);
 		return { error }
 	} else {
-		console.log("Block inserted:", data);
         return { data }
 	}
 }
@@ -104,13 +100,10 @@ export async function updateBlock (blockId: number, updatedContent: string,) {
     .select(); 
 
   if (error) {
-    console.error("Error updating block:", error.message);
     return { error };
   } else if (data && data.length > 0) {
-    console.log("Block updated:", data);
     return { data: data[0] };
   } else {
-    console.error("No block updated.");
     return { error: "No block updated" };
   }
 	

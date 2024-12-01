@@ -21,15 +21,23 @@ export default function NoteClient({ note, initialBlocks } : {note: Note; initia
   };
 
   const handleUpdateBlock = async (blockId: number, updatedContent: string) => {
-    const { error } = await updateBlock(blockId, updatedContent);
-    if (error) {
-      alert('Error updating block:');
-    } else {
-      setBlocks((prev) =>
-        prev.map((block) =>
-          block.block_id === blockId ? { ...block, block_content: updatedContent } : block
-        )
-      );
+    const block = blocks.find((block) => block.block_id === blockId);
+
+    // Check if the content is actually different
+    if (block && block.block_content != updatedContent) {
+      const { error } = await updateBlock(blockId, updatedContent);
+
+      if (error) {
+        alert("Error updating block:");
+      } else {
+        setBlocks((prev) =>
+          prev.map((block) =>
+            block.block_id === blockId
+              ? { ...block, block_content: updatedContent }
+              : block
+          )
+        );
+      }
     }
   };
 
