@@ -16,3 +16,5 @@ export type Notebook = {
 };
 
 export type Note = Database["public"]["Tables"]["notes"]["Row"];
+
+export type Block = Database["public"]["Tables"]["blocks"]["Row"];

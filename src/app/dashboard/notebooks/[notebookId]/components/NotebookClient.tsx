@@ -5,7 +5,7 @@ import CreateNoteModal from './CreateNoteModal';
 import NoteList from './NoteList';
 import { Notebook, Note } from '@/types/custom';
 
-export default function NoteClient ({ notebook, notes }: { notebook: Notebook; notes: Note[] }) {
+export default function NotebookClient ({ notebook, notes }: { notebook: Notebook; notes: Note[] }) {
   const [showAddNoteModal, setShowAddNoteModal] = useState(false);
 
   const openAddNoteModal = () => setShowAddNoteModal(true);

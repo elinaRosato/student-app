@@ -40,7 +40,7 @@ export type Database = {
           block_id: number
           block_metadata: Json | null
           block_type: string
-          note_id: number | null
+          note_id: number
           user_id: string
         }
         Insert: {
