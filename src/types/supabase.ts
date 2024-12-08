@@ -42,6 +42,7 @@ export type Database = {
           block_type: string
           note_id: number
           user_id: string
+          order: number
         }
         Insert: {
           block_content?: string | null
@@ -50,6 +51,7 @@ export type Database = {
           block_type: string
           note_id?: number | null
           user_id: string
+          order: number
         }
         Update: {
           block_content?: string | null
@@ -58,6 +60,7 @@ export type Database = {
           block_type?: string
           note_id?: number | null
           user_id?: string
+          order?: number | null
         }
         Relationships: [
           {

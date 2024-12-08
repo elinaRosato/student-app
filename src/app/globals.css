@@ -33,3 +33,40 @@ body {
   color: var(--textPrimary);
   font-family: var(--font-family);
 }
+
+/* Custom style for bullet lists */
+.list-disc::before {
+  content: "\2022"; 
+  position: absolute;
+  left: 16px; 
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px; 
+  color: #4A4A4A;
+}
+
+
+
+/* Custom style for numbered lists */
+.numbered-list-container {
+  counter-reset: block-counter;
+}
+
+.numbered-list-item {
+  position: relative;
+  counter-increment: block-counter;
+  list-style: none;
+}
+
+.numbered-list-item::before {
+  content: counter(block-counter) ". ";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4A4A4A;
+}
+
+.resetCounter {
+  counter-reset: block-counter;
+}
