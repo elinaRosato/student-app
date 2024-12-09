@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import BlockComponent from './BlockComponent';
 import AddBlockButton from './AddBlockButton';
 import { Block, Note, Notebook } from '@/types/custom';
 import { addBlock, deleteBlock, updateBlockContent, updateBlockOrder } from '../actions';
+import BlockList from './BlockList';
+import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
+import { Edge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/dist/types/types';
+
 
 export default function NoteClient({ note, initialBlocks } : {note: Note; initialBlocks: Block[]}) {
   const [blocks, setBlocks] = useState(initialBlocks.sort((a, b) => a.order - b.order));
@@ -84,31 +87,50 @@ export default function NoteClient({ note, initialBlocks } : {note: Note; initia
     }
   }
 
+  const handleReorderBlocks = async (sourceIndex: number, targetIndex: number, closestEdgeOfTarget: Edge | null) => {
+    const reorderedBlocks = reorderWithEdge({
+      list: blocks,
+      startIndex: sourceIndex,
+      indexOfTarget: targetIndex,
+      closestEdgeOfTarget,
+      axis: 'vertical',
+    });
+    
+    // Ensure unique order numbers
+    reorderedBlocks.forEach((block, index) => {
+      block.order = index + 1; // Adjust the order to be unique (starting from 1)
+    });
+    
+    // Update the front-end state
+    setBlocks(reorderedBlocks);
+  
+    try {
+      // Perform backend updates concurrently
+      const updatePromises = reorderedBlocks.map((block, index) => 
+        updateBlockOrder(block.block_id, index + 1) // Ensure order starts from 1
+      );
+      const updateResults = await Promise.all(updatePromises);
+  
+      // Check for errors in any of the updates
+      const errors = updateResults.filter(result => result.error);
+      if (errors.length > 0) {
+        console.error("Some block updates failed:", errors);
+      }
+    } catch (error) {
+      console.error("Error while updating block order in the backend:", error);
+    }
+  };
+
   return (
     <div className="py-6 px-4">
       <h1 className="text-3xl font-bold mb-4">{note.note_title}</h1>
       <hr className="border-t-1 border-solid border-slate-300 my-6" />
-      <div>
-        {blocks.length > 0 ? (
-          blocks.map((block, index) => {
-            const shouldResetCounter = 
-              block.block_type === "numbered_list" &&
-              (index === 0 || blocks[index - 1].block_type !== "numbered_list");
-
-            return (
-              <BlockComponent
-                key={block.block_id}
-                block={block}
-                resetCounter={shouldResetCounter}
-                onAdd={handleAddBlock}
-                onUpdate={(content) => handleUpdateBlockContent(block.block_id, content)}
-                onDelete={handleDelete}
-              />
-            )})
-        ) : (
-          <p className="text-slate-500 py-2">Press + to create a block</p>
-        )}
-      </div>
+      <BlockList 
+        blocks={blocks} 
+        handleAddBlock={handleAddBlock} 
+        handleUpdateBlockContent={handleUpdateBlockContent} 
+        handleDelete={handleDelete} 
+        handleReorderBlocks={handleReorderBlocks} />
       <AddBlockButton onAdd={handleAddBlock} />
     </div>
   );
