@@ -18,3 +18,13 @@ export type Notebook = {
 export type Note = Database["public"]["Tables"]["notes"]["Row"];
 
 export type Block = Database["public"]["Tables"]["blocks"]["Row"];
+
+export type Task = {
+  task_id: number;
+  task_description: string;
+  task_due_date: string | null;
+  task_status: string;
+  task_courses?: {
+    course_id: number;
+  }[];
+};

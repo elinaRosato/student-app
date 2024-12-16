@@ -274,7 +274,7 @@ export type Database = {
           task_description: string
           task_due_date: string | null
           task_id: number
-          task_status: string | null
+          task_status: string 
           user_id: string | null
         }
         Insert: {
