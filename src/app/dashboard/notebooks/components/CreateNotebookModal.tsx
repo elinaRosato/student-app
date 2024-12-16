@@ -99,25 +99,25 @@ export default function CreateNotebookModal ({ onClose, courses }: { onClose: ()
 
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
-              {selectedCourses.map((courseId) => {
-                const course = courses.find((c) => c.course_id === courseId);
-                return (
-                  <div
-                    key={courseId}
-                    className="flex items-center bg-blue-200 px-2 rounded-lg text-sm text-slate-500 font-light"
-                  >
-                    {course?.course_name}
-                    <button
-                      type="button"
-                      onClick={() => removeCourse(courseId)}
-                      className="ml-2 text-slate-500 text-sm font-light"
+                {selectedCourses.map((courseId) => {
+                  const course = courses.find((c) => c.course_id === courseId);
+                  return (
+                    <div
+                      key={courseId}
+                      className="flex items-center bg-blue-200 px-2 rounded-lg text-sm text-slate-500 font-light"
                     >
-                      &times;
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
+                      {course?.course_name}
+                      <button
+                        type="button"
+                        onClick={() => removeCourse(courseId)}
+                        className="ml-2 text-slate-500 text-sm font-light"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <div className='flex gap-4 justify-end'>
               <button type="button" onClick={onClose} className="bg-slate-200 text-slate-700 px-4 py-2 rounded-md">Cancel</button>
