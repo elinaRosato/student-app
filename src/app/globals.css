@@ -70,3 +70,31 @@ body {
 .resetCounter {
   counter-reset: block-counter;
 }
+
+
+
+/* React Date Picker */
+.react-datepicker {
+  border-radius: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  background-color: #F9FAFC !important;
+  font-family: var(--font-family) !important;
+}
+
+.react-datepicker__header {
+  border-radius: 20px 20px 0 0 !important;
+  border: 1px solid #e2e8f0 !important;
+  background-color: #F1F5F9 !important;
+  font-family: var(--font-family) !important;
+}
+
+.react-datepicker__day--selected {
+  background-color: #007FFF !important;
+  border-radius: 50% !important;
+}
+
+.react-datepicker__day--today {
+  border: 1px dashed #e2e8f0 !important;
+  font-weight: bold !important;
+  border-radius: 50% !important;
+}

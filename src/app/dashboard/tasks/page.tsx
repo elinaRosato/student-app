@@ -1,10 +1,20 @@
-const Tasks = () => {
-    return (
-      <>
-        <h1 className="text-3xl font-bold">Tasks</h1>
-        {/* Your dashboard content here */}
-      </>
-    );
-  };
+'use server'
+
+import TasksClient from './components/TasksClient';
+import { getMinimalCourses, getTasks } from './actions';
+
+const Tasks = async () => {
+
+  const  tasks  = await getTasks();
   
-  export default Tasks;
+  const courses = await getMinimalCourses();
+
+
+  return (
+    <>
+        <TasksClient tasks={tasks || []} courses={courses} />
+    </>
+  );
+};
+
+export default Tasks;
