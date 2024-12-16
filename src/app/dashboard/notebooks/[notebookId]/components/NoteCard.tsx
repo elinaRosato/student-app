@@ -24,12 +24,12 @@ export default function NoteCard( { note }: { note: Note } ) {
       <div>
         <div className='flex gap-2'>
           <span className="text-xl">{'📝'}</span>
-          <h3 className="text-xl font-medium text-slate-600">{note.note_title}</h3>
+          <h3 className="text-lg font-medium text-slate-600">{note.note_title}</h3>
         </div>
       </div>
       <div className='flex gap-4 align-start'>
         <button onClick={(e) => handleDelete(e, note.note_id) }>
-          <Delete01Icon size={24} />
+          <Delete01Icon size={19} />
         </button>
       </div>
     </Link>

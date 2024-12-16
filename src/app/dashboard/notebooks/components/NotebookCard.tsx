@@ -24,7 +24,7 @@ export default function NotebookCard( { notebook }: { notebook: Notebook } ) {
       <div>
         <div className='flex gap-2'>
           <span className="text-xl">{'📓'}</span>
-          <h3 className="text-xl font-medium text-slate-600">{notebook.notebook_name}</h3>
+          <h3 className="text-lg font-medium text-slate-600">{notebook.notebook_name}</h3>
         </div>
         <div className='flex flex-wrap gap-2 wrap mt-2'>
           {notebook.notebook_courses?.map((course) => (
@@ -39,7 +39,7 @@ export default function NotebookCard( { notebook }: { notebook: Notebook } ) {
       </div>
       <div className='flex gap-4 align-start'>
         <button onClick={(e) => handleDelete(e, notebook.notebook_id) }>
-          <Delete01Icon size={24} />
+          <Delete01Icon size={18} />
         </button>
       </div>
     </Link>
